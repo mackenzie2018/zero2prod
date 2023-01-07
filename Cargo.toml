@@ -5,6 +5,14 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+path = "src/lib.rs"
+
+
+[[bin]]
+path = "src/main.rs"
+name = "zero2prod"
+
 
 
 [target.x86_64-unknown-linux-gnu]
@@ -13,3 +21,21 @@ rustflags = ["-C", "linker=clang", "-C", "link-arg=-fuse-ld=lld"]
 
 
 [dependencies]
+actix-web = "4"
+tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
+reqwest = "0.11"
+serde = { version = "1", features = ["derive"] }
+config = "0.11"
+
+
+[dependencies.sqlx]
+version = "0.5.7"
+deafult-features = false
+features = [
+        "runtime-actix-rustls",
+        "macros",
+        "postgres",
+        "uuid",
+        "chrono",
+        "migrate",
+]
